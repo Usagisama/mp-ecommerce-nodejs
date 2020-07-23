@@ -23,6 +23,12 @@ app.get('/detail', function (req, res) {
     res.render('detail', req.query);
 });
 
+//webhooks
+app.post('/webhooks', function (req, res) {
+    res.send(req.query);
+    console.log(res.body);
+});
+
 //Payments responses routes
 app.get('/success', function (req, res) {
     res.render('success', req.query);
@@ -86,7 +92,6 @@ app.post('/payment', (req, res, next) => {
     mercadopago.preferences.create(preference)
         .then(function (response) {
             // Este valor reemplazará el string "$$init_point$$" en tu HTML
-            console.log(response);
             res.redirect(response.body.init_point);
         }).catch(function (err) {
             next(err);
