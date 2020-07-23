@@ -75,7 +75,7 @@ app.post('/payment', (req, res, next) => {
             installments: 6
         },
         back_urls: {
-            success: 'https://usagisama-mp-commerce-node.herokuapp.com/success',
+            success: 'https://usagisama-mp-commerce-nodejs.herokuapp.com/success',
             pending: 'https://usagisama-mp-commerce-nodejs.herokuapp.com/failure',
             failure: 'https://usagisama-mp-commerce-nodejs.herokuapp.com/pending'
         },
