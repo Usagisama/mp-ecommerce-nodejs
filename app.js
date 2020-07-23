@@ -2,6 +2,7 @@ var express = require('express');
 var exphbs  = require('express-handlebars');
 var mercadopago = require('mercadopago');
 var app = express();
+app.use(express.json());
 
 require('dotenv').config();
 
