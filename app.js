@@ -24,13 +24,10 @@ app.get('/detail', function (req, res) {
 });
 
 //webhooks
-app.post('/webhooks', function (req, res) {
-    res.status(200).send("CREATED");
-    setTimeout(()=>{
-        res.redirect(`https://api.mercadopago.com/v1/payments/${res.query.id}?access_token=${process.env.MERCADOPAGO_TOKEN}`);s
-    },500)
-    
-});
+app.post('/webhook', (req, res) => {
+    res.send({ success: true, data: req.body });
+    console.log("Request body:", req.body)
+})
 
 //Payments responses routes
 app.get('/success', function (req, res) {
