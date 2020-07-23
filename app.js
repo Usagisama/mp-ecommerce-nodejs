@@ -75,7 +75,7 @@ app.post('/payment', (req, res, next) => {
             installments: 6
         },
         back_urls: {
-            success: 'https://usagisama-mp-commerce-node.herokuapp.com/success?collection_id=[PAYMENT_ID]&collection_status=approved&external_reference=[EXTERNAL_REFERENCE]&payment_type=credit_card&preference_id=[PREFERENCE_ID]&site_id=[SITE_ID]&processing_mode=aggregator&merchant_account_id=null',
+            success: 'https://usagisama-mp-commerce-node.herokuapp.com/success',
             pending: 'https://usagisama-mp-commerce-nodejs.herokuapp.com/failure',
             failure: 'https://usagisama-mp-commerce-nodejs.herokuapp.com/pending'
         },
