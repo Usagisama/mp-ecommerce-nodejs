@@ -4,6 +4,8 @@ var mercadopago = require('mercadopago');
 var app = express();
 var PaymentController = require('./controller/payment');
 
+require('dotenv').config();
+
 //Mercadopago config
 // Agrega credenciales
 mercadopago.configure({
