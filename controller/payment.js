@@ -1,4 +1,4 @@
-import mercadopago from 'mercadopago';
+const mercadopago = require ('mercadopago');
 
 
 const controller = {
