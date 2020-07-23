@@ -24,7 +24,7 @@ app.get('/detail', function (req, res) {
 });
 
 //webhooks
-app.post('/webhook', (req, res) => {
+app.post('/webhooks', (req, res) => {
     res.send({ success: true, data: req.body });
     console.log("Request body:", req.body)
 })
