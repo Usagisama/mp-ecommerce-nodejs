@@ -26,7 +26,7 @@ app.get('/detail', function (req, res) {
 //webhooks
 app.post('/webhooks', function (req, res) {
     res.send(req.query);
-    console.log(res);
+    console.log(req.body);
 });
 
 //Payments responses routes
