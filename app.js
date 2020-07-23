@@ -8,7 +8,8 @@ require('dotenv').config();
 //Mercadopago config
 // Agrega credenciales
 mercadopago.configure({
-    access_token: process.env.MERCADOPAGO_TOKEN
+    access_token: process.env.MERCADOPAGO_TOKEN,
+    integrator_id: process.env.INTEGRATOR_ID
 });
 
 app.engine('handlebars', exphbs());
@@ -80,11 +81,13 @@ app.post('/payment', (req, res, next) => {
             failure: 'https://usagisama-mp-commerce-nodejs.herokuapp.com/pending'
         },
         auto_return: 'approved',
+        notification_url: 'https://usagisama-mp-commerce-nodejs.herokuapp.com/',
     };
     mercadopago.preferences.create(preference)
         .then(function (response) {
             // Este valor reemplazará el string "$$init_point$$" en tu HTML
-            res.redirect(response.body.sandbox_init_point);
+            console.log()
+            res.redirect(response.body.init_point);
         }).catch(function (err) {
             next(err);
         });
