@@ -44,9 +44,9 @@ app.post('/payment', (req, res, next) => {
                 quantity: parseInt(req.query.quantity),
                 description: 'Dispositivo móvil de Tienda e-commerce',
                 picture_url: 'https://http2.mlstatic.com/celular-motorola-moto-e6-plus-special-edition-64gb-4gb-12c-D_NQ_NP_805051-MLA41165860417_032020-F.jpg',
-                external_reference: 'andreagallo264@gmail.com'
             }
         ],
+        external_reference: 'andreagallo264@gmail.com',
         payer: {
             name: 'Lalo',
             surname: 'Landa',
