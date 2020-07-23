@@ -2,7 +2,6 @@ var express = require('express');
 var exphbs  = require('express-handlebars');
 var mercadopago = require('mercadopago');
 var app = express();
-var PaymentController = require('./controller/payment');
 
 require('dotenv').config();
 
@@ -23,7 +22,74 @@ app.get('/detail', function (req, res) {
     res.render('detail', req.query);
 });
 
-app.get('/payment', PaymentController.payment);
+//Payments responses routes
+app.get('/success', function (req, res) {
+    res.render('success', req.query);
+});
+app.get('/failure', function (req, res) {
+    res.render('failure');
+});
+app.get('/pending', function (req, res) {
+    res.render('pending');
+});
+
+//Payment route
+app.post('/payment', (req, res, next) => {
+    let preference = {
+        items: [
+            {
+                id: 1234,
+                title: req.query.title,
+                unit_price: parseInt(req.query.price),
+                quantity: parseInt(req.query.quantity),
+                description: 'Dispositivo móvil de Tienda e-commerce',
+                picture_url: 'https://http2.mlstatic.com/celular-motorola-moto-e6-plus-special-edition-64gb-4gb-12c-D_NQ_NP_805051-MLA41165860417_032020-F.jpg',
+                external_reference: 'andreagallo264@gmail.com'
+            }
+        ],
+        payer: {
+            name: 'Lalo',
+            surname: 'Landa',
+            email: 'test_user_63274575@testuser.com',
+            phone: {
+                area_code: '11',
+                number: 22223333  
+            },
+            address: {
+                street_name: 'False',
+                street_number: 123,
+                zip_code: '1111'
+            }
+        },
+        payment_methods: {
+            excluded_payment_methods: [
+                {
+                    id: 'amex'
+                }
+            ],
+            excluded_payment_types: [
+                {
+                    id: 'atm'
+                }
+            ],
+            installments: 6
+        },
+        back_urls: {
+            success: 'https://usagisama-mp-commerce-nodejs.herokuapp.com/success?collection_id=[PAYMENT_ID]&collection_status=approved&external_ref=[SITE_ID]&processing_mode=aggregator&merchant_account_id=null',
+            pending: 'https://usagisama-mp-commerce-nodejs.herokuapp.com/failure',
+            failure: 'https://usagisama-mp-commerce-nodejs.herokuapp.com/pending'
+        },
+        auto_return: 'approved',
+    };
+    mercadopago.preferences.create(preference)
+        .then(function (response) {
+            // Este valor reemplazará el string "$$init_point$$" en tu HTML
+            res.json({ response});
+        }).catch(function (err) {
+            next(err);
+        });
+ 
+});
 
 app.use(express.static('assets'));
  
