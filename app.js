@@ -87,7 +87,7 @@ app.post('/payment', (req, res, next) => {
             failure: 'https://usagisama-mp-commerce-nodejs.herokuapp.com/pending'
         },
         auto_return: 'approved',
-        notification_url: 'https://usagisama-mp-commerce-nodejs.herokuapp.com/webhook',
+        notification_url: 'https://usagisama-mp-commerce-nodejs.herokuapp.com/webhooks',
     };
     mercadopago.preferences.create(preference)
         .then(function (response) {
