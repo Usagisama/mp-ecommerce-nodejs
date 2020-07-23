@@ -25,8 +25,8 @@ app.get('/detail', function (req, res) {
 
 //webhooks
 app.post('/webhooks', function (req, res) {
-    res.send(req.query);
-    console.log(req.body);
+    res.status(200).send("CREATED");
+    res.redirect(`https://api.mercadopago.com/v1/payments/${res.query.id}?access_token=${process.env.MERCADOPAGO_TOKEN}`);
 });
 
 //Payments responses routes
